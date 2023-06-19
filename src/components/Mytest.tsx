@@ -1,14 +1,14 @@
 import * as S from './style';
 import { FC } from 'react';
 
-interface I{{ pascalCase name}} {
+interface IMytest {
 
 };
 
-export const {{ pascalCase name}}:FC<> = ({}) => {
+export const Mytest:FC<> = ({}) => {
   return (
     <S.Component>
-      <h1>{{ name }}</h1>
+      <h1>Mytest</h1>
     </S.Component>
   )
 }

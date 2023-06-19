@@ -16,8 +16,8 @@ export default function (plop) {
     actions: [
       {
         type: "add",
-        path: "./src/components/{{pascalCase name}}.tsx",
-        templateFile: "templates/component.tsx.hbs",
+        path: "../{{path}}/{{pascalCase name}}.tsx",
+        templateFile: "../generators/templates/component.tsx.hbs",
       },
     ],
   });
