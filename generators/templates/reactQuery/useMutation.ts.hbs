@@ -1,0 +1,48 @@
+import { useMutation, useQueryClient } from 'react-query';
+import { API } from 'services/api.ts';
+import { toast } from 'react-toastfy';
+
+interface IParams {};
+
+interface IHookParams {
+  queryInvalidateKeys?: string[];
+  hiddenToastfy?: boolean;
+}
+
+const {{ camelCase queryName }} = async(params: IParams) => {
+
+  try {
+    const response = API.post(``);
+    return response.data;
+  }catch (error) {
+    throw new Error('An exeption has occurried, check the network')
+  }
+};
+
+export const use{{ pascalCase queryName }} = ({ hiddenToastfy = false, queryInvalidateKeys }: IHookParams) => {
+
+  const queryClient = useQueryClient()
+  return useMutation(async(params: IParams) => {
+
+    if(hiddenToastfy) {
+      return {{ camelCase queryName}}(params)
+    };
+
+    return toast.promise(() => {{ camelCase queryName }}(params), {
+      error: 'Erro',
+      pending: 'Pendente',
+      success: 'Sucesso'
+    })
+  }, {
+    onSuccess: () => {
+      if (queryInvalidateKeys) {
+        const keysToInvalidate = queryInvalidateKeys.map((key) =>
+          queryClient.invalidateQueries(key)
+        );
+
+        return Promise.all(keysToInvalidate);
+      } else null;
+    }
+  });
+};
+
