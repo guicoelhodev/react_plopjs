@@ -42,7 +42,7 @@ export default function (plop) {
     ],
   }),
     plop.setGenerator("react-query/useQuery", {
-      description: "Create custom hook for useQuery hook",
+      description: "Create useQuery hook",
       prompts: [
         {
           type: "input",
@@ -58,9 +58,31 @@ export default function (plop) {
       actions: [
         {
           type: "add",
-          path: "../{{path}}/{{ camelCase queryName }}/index.ts",
+          path: "../{{path}}/use {{ pascalCase queryName }}/index.ts",
           templateFile: "./templates/reactQuery/useQuery.ts.hbs",
         },
       ],
     });
+  plop.setGenerator("react-query/useMutation", {
+    description: "Create useMutation hook",
+    prompts: [
+      {
+        type: "input",
+        name: "queryName",
+        message: "Add query name:",
+      },
+      {
+        type: "input",
+        name: "path",
+        message: "Add relative path:",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../{{path}}/use{{ pascalCase queryName }}/index.ts",
+        templateFile: "./templates/reactQuery/useMutation.ts.hbs",
+      },
+    ],
+  });
 }
