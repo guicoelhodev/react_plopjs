@@ -1,0 +1,41 @@
+import { useInfiniteQuery } from 'react-query';
+import { API } from 'services/api.ts';
+import { toast } from 'react-toastfy';
+
+interface IParams {};
+interface IHookParams {
+  params: IParams;
+  hiddenToastfy?: boolean;
+}
+
+type IResponse = {};
+const {{ camelCase queryName }} = async(params: IParams, pageParam: number) => {
+
+  try {
+    const response = API.get(``);
+    return response.data as IResponse;
+  }catch (error) {
+    throw new Error('An exeption has occurried, check the network')
+  }
+};
+
+export const use{{ pascalCase queryName }} = ({ params, hiddenToastfy = false }: IHookParams) => {
+  return useInfiniteQuery(['{{camelCase queryName}}'], async({ pageParam = 0}) => {
+
+    if(hiddenToastfy) {
+      return {{ camelCase queryName}}(params, pageParam)
+    };
+
+    return toast.promise(() => {{ camelCase queryName }}(params, pageParam), {
+      error: 'Erro',
+      pending: 'Pendente',
+      success: 'Sucesso'
+    })
+  }, {
+     getNextPageParam: (lastPage: any, pages: any) => {
+        if (lastPage?.data?.length < 60) return undefined;
+        return pages?.length;
+      },
+  });
+};
+

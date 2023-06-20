@@ -84,5 +84,28 @@ export default function (plop) {
         templateFile: "./templates/reactQuery/useMutation.ts.hbs",
       },
     ],
-  });
+  }),
+   plop.setGenerator("react-query/useInfiniteQuery", {
+    description: "Create useInfiniteQuery hook",
+    prompts: [
+      {
+        type: "input",
+        name: "queryName",
+        message: "Add query name:",
+      },
+      {
+        type: "input",
+        name: "path",
+        message: "Add relative path:",
+      },
+    ],
+    actions: [
+      {
+        type: "add",
+        path: "../{{path}}/use{{ pascalCase queryName }}/index.ts",
+        templateFile: "./templates/reactQuery/useInfiniteQuery.ts.hbs",
+      },
+    ],
+  })
+  
 }

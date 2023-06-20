@@ -1,0 +1,37 @@
+import { useQuery } from 'react-query';
+import { API } from 'services/api.ts';
+import { toast } from 'react-toastfy';
+
+interface IParams {};
+interface IHookParams {
+  params: IParams;
+  hiddenToastfy?: boolean;
+}
+
+type IResponse {};
+
+const {{ camelCase queryName }} = async(params: IParams) => {
+
+  try {
+    const response = API.get(``);
+    return response.data;
+  }catch (error) {
+    throw new Error('An exeption has occurried, check the network')
+  }
+};
+
+export const use{{ pascalCase queryName }} = ({ params, hiddenToastfy = false }: IHookParams) => {
+  return useQuery<IResponse>(['{{camelCase queryName}}'], async() => {
+
+    if(hiddenToastfy) {
+      return {{ camelCase queryName}}(params)
+    };
+
+    return toast.promise(() => {{ camelCase queryName }}(params), {
+      error: 'Erro',
+      pending: 'Pendente',
+      success: 'Sucesso'
+    })
+  });
+};
+
