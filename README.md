@@ -17,6 +17,11 @@
 [![Storybook - 7.0.22](https://img.shields.io/static/v1?label=Storybook&message=7.0.22&color=%2335F8B1)](https://)
 
 <br />
+
+  <div align='center'>
+    <img src='./github/preview.gif' alt='preview-gif' height='600'/>
+  </div>
+
 </div>
 
 ## Summary
